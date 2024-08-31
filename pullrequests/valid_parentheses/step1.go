@@ -2,7 +2,11 @@
 package validparentheses
 
 /*
-COMMENT
+時間：11分
+やけに時間がかかってしまった。まだまだコーディング力が弱い。
+これぐらいのネストなら良いかなと思って書いたのですが、案外見辛いのと、変数名も良くない。
+
+またこの部分`if len(stack) == 0`に気づかずエラーを出してしまった。
 */
 func isValidStep1(s string) bool {
 	var stack []rune

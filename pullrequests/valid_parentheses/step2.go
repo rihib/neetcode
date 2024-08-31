@@ -2,7 +2,7 @@
 package validparentheses
 
 /*
-COMMENT
+ネストと変数名を改善しました。
 */
 func isValidStep2(s string) bool {
 	var stack []rune
