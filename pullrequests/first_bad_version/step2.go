@@ -7,15 +7,14 @@ package firstbadversion
 */
 
 /*
-今回はfirstBadVersion1のようにrightをn+1で初期化しなくてもパスすることができる。
+実はこの問題はfirstBadVersion1のようにrightをn+1で初期化しなくてもパスすることができる。
 
-通常の二分探索では半閉区画で書く場合、rightは常に探索済みの範囲に入れておく必要がある。もしもrightをlen(nums)-1で初期化してしまうと、一番最後の要素が探しているtargetの場合に、left < rightによってleftがtargetに到達した瞬間に探索が終了し、targetが存在しなかったという扱いになってしまうため。
+通常の二分探索では半閉区画で書く場合、rightは常に探索済みの範囲に入れておく必要がある。もしもrightをlen(nums)-1で初期化してしまうと、一番最後の要素が探しているtargetの場合に、left < rightによってleftがtargetに到達した瞬間に探索が終了し、targetが存在しなかったという扱いになってしまう。
 
 しかし、今回の場合は必ずFirst Bad Versionが存在する前提になっているため、left < rightによって探索が終了したらleft（またはright）が返るようになっているので、rightをnで初期化してもパスする。
 
-しかし、本来であればBad versionが１つも存在しない入力が来ることも考えられるため、その場合の処理も加える必要がある。仮に見つからなかった場合に-1を返すようにする（もっとちゃんとするならerrorを返した方がわかりやすいとは思うが）なら、firstBadVersion2またはfirstBadVersion3のようにする必要がある。
+しかし、本来であればBad versionが１つも存在しない入力が来ることも考えられるため、その場合の処理も加える必要がある。仮に見つからなかった場合に-1を返すようにする（もっとちゃんとするならerrorを返した方がわかりやすいとは思うが）なら、firstBadVersion2またはfirstBadVersion3のようにする必要がある。通常の二分探索に寄せて書くのであれば、firstBadVersion4のように書くことができる。
 
-通常の二分探索に寄せて書くのであれば、firstBadVersion4のように書くことができる。
 逆に言えば通常の二分探索もfirstBadVersion2のように書くことができる。この場合は単純にtarget以上か否かでfalse, trueの範囲を分け、その境界の最初のtrueを求めるようにし、最後にその求めた値がtargetかどうかを確かめれば良い。
 
 ```Go
