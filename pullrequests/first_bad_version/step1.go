@@ -1,0 +1,48 @@
+//lint:file-ignore U1000 Ignore all unused code
+package firstbadversion
+
+const BadVersion = 4
+
+func isBadVersion(version int) bool {
+	return version == BadVersion
+}
+
+/*
+レビュワーの方へ：
+	- このコードは既にGoの標準のフォーマッタで整形済みです。演算子の周りにスペースがあったりなかったりしますが、これはGoのフォーマッタによるもので、優先順位の高い演算子の周りにはスペースが入らず、低い演算子の周りには入るようになっています。https://qiita.com/tchssk/items/77030b4271cd192d0347
+*/
+
+/*
+時間：8分30秒
+
+単なる二分探索だが、少し混乱してしまったため、時間がかかってしまった。二分探索については理解しているつもりだが、考えずにできるレベルにはまだなれてないので少し問題文が変更されていると頭で考える必要が出てきてしまう。
+
+半閉区画の場合、rightは常にtrueの範囲に収まり続け、leftはfalseとtrueの境界にあるとき、mid+1によりtrueに移動するため、right <= leftになった瞬間はleftはFirst bad versionであることがわかる。
+
+閉区画の場合、falseとtrueの境界にあるとき、rightはmid-1によりfalseの方に移動するのに対し、leftはtrueの方に移動するため、right < leftになった瞬間にleftはFirst bad versionであることがわかる。right <= leftとしてしまうとfalseの範囲内でright == leftとなる場合を除けない。
+*/
+func firstBadVersionHalfClosed(n int) int {
+	left, right := 1, n+1
+	for left < right {
+		mid := left + (right-left)/2
+		if isBadVersion(mid) {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
+}
+
+func firstBadVersionClosed(n int) int {
+	left, right := 1, n
+	for left <= right {
+		mid := left + (right-left)/2
+		if isBadVersion(mid) {
+			right = mid - 1
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
+}
