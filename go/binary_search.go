@@ -70,7 +70,7 @@ func binarySearchHalfClosed4(nums []int, target int) int {
 	return right
 }
 
-func binarySearchClosed(nums []int, target int) int {
+func binarySearchClosed1(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)/2
@@ -84,6 +84,22 @@ func binarySearchClosed(nums []int, target int) int {
 		}
 	}
 	return -1
+}
+
+func binarySearchClosed2(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+	if left >= len(nums) || nums[left] != target {
+		return -1
+	}
+	return left
 }
 
 func search(nums []int, target int) int {
