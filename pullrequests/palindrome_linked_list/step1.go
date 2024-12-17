@@ -12,7 +12,8 @@ type ListNode struct {
 */
 
 /*
-COMMENT
+時間：５分
+スライスに変換し、Palindromeかどうかを比較するようにした。
 */
 func isPalindromeLinkedList(head *ListNode) bool {
 	var values []int
